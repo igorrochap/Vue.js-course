@@ -2,6 +2,7 @@
   <div id="app">
 
     <h3>Cadastro: </h3>
+    <small id="erro_nome" v-show="nameError">Campo vazio, por favor preencha</small><br>
     <input type="text" placeholder="Nome" v-model="nameField"><br>
     <input type="email" placeholder="Email" v-model="emailField"><br>
     <input type="number" placeholder="Idade" v-model="ageField"><br>
@@ -27,6 +28,7 @@ export default {
   name: 'App',
   data(){
     return{
+      nameError: false,
       nameField: "",
       emailField: "",
       ageField: 0,
@@ -46,21 +48,29 @@ export default {
   },
   methods: {
     cadastrarCliente: function(){
-      this.clientes.push({
-        id: Date.now(),
-        nome: this.nameField,
-        email: this.emailField,
-        idade: this.ageField
-      });
+      if(this.nameField == "" || this.nameField == " " || this.nameField.length < 2){
+        this.nameError = true;
+      }
+      else{
+        this.clientes.push({
+          id: Date.now(),
+          nome: this.nameField,
+          email: this.emailField,
+          idade: this.ageField
+        });
 
-      this.nameField = "";
-      this.emailField = "";
-      this.ageField = 0;
+        this.nameError = false;
+        this.nameField = "";
+        this.emailField = "";
+        this.ageField = 0;
+      }
     }
   }
 }
 </script>
 
 <style>
-
+  #erro_nome{
+    color: red;
+  }
 </style>
