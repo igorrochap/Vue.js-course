@@ -9,7 +9,7 @@
     <button @click="cadastrarCliente">Cadastrar</button>
 
     <hr>
-    <div v-for="(cliente, index) in clientes" :key="cliente.id">
+    <div v-for="(cliente, index) in sortClientes" :key="cliente.id">
       <h4>{{ index }}</h4>
       <hr>
       <Cliente 
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import Cliente from './components/Cliente';
 //import Produto from './components/Produto';
 
@@ -72,6 +73,11 @@ export default {
       let id = $event.cli_id;
       let newArray = this.clientes.filter(cliente => cliente.id != id);
       this.clientes = newArray;
+    }
+  },
+  computed: {
+    sortClientes: function(){
+      return _.orderBy(this.clientes, ['nome'], ['asc']);
     }
   }
 }
