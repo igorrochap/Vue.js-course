@@ -1,6 +1,6 @@
 <template>
     <div :class="{'cliente' : !isPremium, 'cliente-premium' : isPremium}">
-        <h4>Nome: {{ cliente.nome }}</h4>
+        <h4>Nome: {{ cliente.nome | nameProcessor}}</h4>
         <hr>
         <p>Email: {{ cliente.email }}</p>
         <!--<p v-show="showAge === true">Idade: {{ cliente.idade }}</p>-->
@@ -41,6 +41,11 @@
             },
             teste: function(){
                 console.log('Teste no dale');
+            }
+        },
+        filters: {
+            nameProcessor: function(value){
+                return value.toUpperCase();
             }
         }
     }
