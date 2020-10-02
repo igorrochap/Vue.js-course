@@ -15,6 +15,7 @@
       <Cliente 
         :cliente="cliente"
         :showAge="true"
+        @delete="deletarCliente($event)"
       />
     </div>
   </div>
@@ -64,6 +65,13 @@ export default {
         this.emailField = "";
         this.ageField = 0;
       }
+    },
+    deletarCliente: function($event){
+      //console.log($event);
+      console.log('recebendo evento');
+      let id = $event.cli_id;
+      let newArray = this.clientes.filter(cliente => cliente.id != id);
+      this.clientes = newArray;
     }
   }
 }

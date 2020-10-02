@@ -8,6 +8,7 @@
         <p v-else>A idade do usuário é privada</p>
 
         <button @click="colorChange($event)">Mudar status</button>
+        <button @click="deleteEmission">Delete</button>
     </div>
 </template>
 
@@ -15,10 +16,6 @@
     export default {
         data(){
             return{
-                /*numero: "1234",
-                email: "jorge1234@jorge.com",
-                descricao: "Descrição",
-                idade: 77*/
                 isPremium: false,
             }
         },
@@ -35,6 +32,15 @@
             colorChange: function(event){
                 console.log(event);
                 this.isPremium = !this.isPremium;
+            },
+            deleteEmission: function(){
+                this.$emit('delete', {
+                    cli_id: this.cliente.id,
+                    component: this
+                });
+            },
+            teste: function(){
+                console.log('Teste no dale');
             }
         }
     }
