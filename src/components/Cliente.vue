@@ -7,8 +7,7 @@
         <p v-if="showAge === true">Idade: {{ cliente.idade }}</p>
         <p v-else>A idade do usuário é privada</p>
 
-        <button v-on:click="isPremium = true">Premium</button>
-        <button v-on:click="isPremium = false">Normal</button>
+        <button @click="colorChange($event)">Mudar status</button>
     </div>
 </template>
 
@@ -31,6 +30,12 @@
             //idade: Number,
             cliente: Object,
             showAge: Boolean
+        },
+        methods: {
+            colorChange: function(event){
+                console.log(event);
+                this.isPremium = !this.isPremium;
+            }
         }
     }
 </script>
@@ -45,7 +50,8 @@
     }
 
     .cliente-premium{
-        background-color: rgb(255, 166, 0);    
+        background-color: black;
+        color: rgb(255, 166, 0);    
         max-width: 600px;
         height: 180px;
         padding: 2%;
